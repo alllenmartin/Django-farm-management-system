@@ -1,0 +1,35 @@
+{% extends 'layout/base-fullscreen.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Login {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-warning text-center mt-2 mb-3"><small style="font-size: 103%;">You have been logged out!</small></div>
+              <div class="btn-wrapper text-center">
+                <small class="text-muted">
+                               <a href="{% url 'login' %}" class="ForgetPwd ml-2">Sign In</a>
+                            </small>
+              </div>
+            </div>
+          
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
