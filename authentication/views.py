@@ -63,3 +63,9 @@ def signup(request):
 
 def home(request):
     return render(request,'index.html')
+
+def user_profile(request):
+    return render(request,'accounts/profile.html')
+
+def user_table(request):
+    return render(request,'table.html')
