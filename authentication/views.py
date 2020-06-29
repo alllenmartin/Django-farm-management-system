@@ -10,6 +10,7 @@ from django.utils.http import urlsafe_base64_encode
 from .token_generator import account_activation_token
 from django.template.loader import render_to_string
 from .forms import SignUpForm
+from  app.models import Farm
 from django.contrib import messages
 
 def activation_sent_view(request):
@@ -40,6 +41,7 @@ def signup(request):
             user = form.save()
             user.refresh_from_db()
             user.profile.first_name = form.cleaned_data.get('first_name')
+            user.profile.other_name = form.cleaned_data.get('other_name')
             user.profile.email = form.cleaned_data.get('email')
             # user can't login until link confirmed
             user.is_active = False
@@ -64,8 +66,13 @@ def signup(request):
 def home(request):
     return render(request,'index.html')
 
+
 def user_profile(request):
-    return render(request,'accounts/profile.html')
+    
+    context = {
+    'farm': Farm.objects.filter(user_id=request.user)
+    }
+    return render(request,'accounts/profile.html', context)
 
 def user_table(request):
     return render(request,'table.html')

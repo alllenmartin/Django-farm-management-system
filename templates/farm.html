@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} Profile {% endblock title %}
+{% block title %} Farm {% endblock title %}
 
 {% block content %}
 
@@ -84,10 +84,31 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h3 class="mb-0">Card tables</h3>
+              <h3 class="mb-0">Farm Details</h3>
             </div>
             <div class="container">
-             {{ form | crispy }}
+             <form method="POST" autocomplete="off">
+             {% csrf_token %}
+             {{ form.farm_name | as_crispy_field }}
+             {{ form.farm_number | as_crispy_field }}
+             <div class="row">
+             <div class="col-md-6">
+               {{ form.mobile_number | as_crispy_field }}
+               {{ form.cultivation_plan | as_crispy_field }}
+               {{ form.scheme | as_crispy_field }}
+             </div>
+             <div class="col-md-6">
+               {{ form.other_number | as_crispy_field }}
+               {{ form.capital | as_crispy_field }}
+               {{ form.address | as_crispy_field }}
+             </div>
+
+             </div>
+           
+             <button type="submit" class="btn btn-info col-xl-4 offset-8">Submit</button>
+             
+             <br><br>
+             </form>
             </div>
       
           </div>
