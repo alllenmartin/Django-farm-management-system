@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from . forms import FarmForm
 from . models import Farm
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 @login_required
 def farm_form(request):
@@ -17,6 +19,30 @@ def farm_form(request):
 
     return render(request, 'farm.html', {'form':form})
 
+
+@login_required
+def registered_users(request):
+    users = User.objects.all()
+    context = {
+    'users': users
+    }
+    return render(request,'users.html', context)
+
+@login_required()
+def user_deactivate(request, user_id):
+    user = User.objects.get(pk=user_id)
+    user.is_active = False
+    user.save()
+    messages.success(request, "User account has been successfully deactivated!")
+    return redirect('app:users')
+
+@login_required()
+def user_activate(request, user_id):
+    user = User.objects.get(pk=user_id)
+    user.is_active = True
+    user.save()
+    messages.success(request, "User account has been successfully activated!")
+    return redirect('app:users')
 
 
 

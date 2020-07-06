@@ -8,7 +8,7 @@ from authentication import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', user_views.signup, name='signup'),
-    path('index/', user_views.home, name='index'),
+    path('index/', user_views.user_dashboard, name='index'),
     path('sent/', user_views.activation_sent_view, name="activation_sent"),
     path('activate/<slug:uidb64>/<slug:token>/',user_views.activate, name='activate'),
     path('login/',auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),

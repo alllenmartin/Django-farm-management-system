@@ -52,6 +52,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True    
+SESSION_COOKIE_AGE = 300                 
+SESSION_SAVE_EVERY_REQUEST = True   
+
 ROOT_URLCONF = 'arpsms.urls'
 
 TEMPLATES = [
@@ -128,6 +132,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/index'
+LOGIN_URL = "/login"
 
 
 EMAIL_USE_TLS = True

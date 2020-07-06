@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from .forms import SignUpForm
 from  app.models import Farm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def activation_sent_view(request):
     return render(request, 'accounts/activation_sent.html')
@@ -63,10 +64,11 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
-def home(request):
+@login_required
+def user_dashboard(request):
     return render(request,'index.html')
 
-
+@login_required
 def user_profile(request):
     
     context = {
@@ -74,5 +76,7 @@ def user_profile(request):
     }
     return render(request,'accounts/profile.html', context)
 
+@login_required
 def user_table(request):
     return render(request,'table.html')
+

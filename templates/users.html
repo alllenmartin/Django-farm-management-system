@@ -1,0 +1,129 @@
+{% extends 'layout/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Farm {% endblock title %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" 
+         style="min-height: 600px; background-image: url(/static/assets/img/theme/banner.jpg); background-size: cover; background-position: center bottom;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Hello {{ request.user.username }}</h1>
+            <p class="text-white mt-0 mb-5">This is your farm registration page. You can add your farm details as well as a little information about your farm.</p>
+            <a href="{% url 'index' %}" class="btn btn-info">Back To Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="container-fluid mt--7">
+ 
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-white mb-0">Card tables</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                 <div class="col-md-6 login-form-1">
+              {% if messages %}
+                 <div class="messages alert alert-success">
+                    {% for message in messages %}
+                     <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                   {% endfor %}
+                 </div>
+              {% endif %}
+              </div>
+         
+                  <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Scheme</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Last Login</th>
+                    <th scope="col">Date Joined</th>
+                    <th scope="col">Action</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3">
+                          <img alt="Image placeholder" src="{{ request.user.profile.image.url }}">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ user.username }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                     {{ request.user.farm.scheme }}
+                    </td>
+                    <td>
+
+                   {% if user.is_active %}
+                     <span class="badge badge-dot mr-4">
+                        <i class="bg-success"></i> Active
+                      </span>
+                   {% else %}
+                    <span class="badge badge-dot mr-4">
+                        <i class="bg-warning"></i> Pending
+                      </span>
+                   {% endif %}
+                     
+                    </td>
+                    <td>
+                     {{ user.last_login }}
+                    </td>
+                    <td>
+                      {{ user.date_joined }}
+                    </td>
+                    <td>
+                      {% if user.is_active %}
+                        <a   href="{% url 'app:deactivate_user' user_id=user.id %}" class="btn btn-sm btn-danger">Deactivate</a>
+                      {% else %}
+                        <a href="{% url 'app:activate_user' user_id=user.id %}" class="btn btn-sm btn-success">Activate</a>
+                      {% endif %}
+                    </td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                 
+                 
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+   
+      {% include "footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
