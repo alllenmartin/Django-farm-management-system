@@ -19,6 +19,8 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name = 'accounts/password_reset_confirm.html'), name='password_reset_confirm' ),
     path('authentication/', include('authentication.urls')),
     path('app/', include('app.urls')),
+    path('products', include('products.urls')),
+    path('cart', include('cart.urls')),
 ]
 
 if settings.DEBUG:

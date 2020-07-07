@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication.apps.AuthenticationConfig',
     'app.apps.AppConfig',
+    'products.apps.ProductsConfig',
+    'cart.apps.CartConfig',
     'crispy_forms',
+    
 ]
 
 MIDDLEWARE = [
@@ -120,6 +123,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Cart Session
+
+CART_SESSION_ID = 'cart'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
